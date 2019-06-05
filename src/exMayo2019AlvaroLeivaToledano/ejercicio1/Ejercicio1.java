@@ -1,9 +1,10 @@
 package exMayo2019AlvaroLeivaToledano.ejercicio1;
 
 /**
- * Escribe un programa que usando la interfaz gráfica de Java escoja un fichero del sistema de archivos y
- * lo almacene en otro de manera que se sustituyan todas las ocurrencias de los siguientes caracteres
- * (mayúscula o minúscula) del fichero original por sus correspondientes números
+ * Interfaz gráfica de Java que escoje un fichero del sistema de archivos y
+ * lo almacene en otro de manera que se sustituyan todas las ocurrencias de los 
+ * siguientes caracteres (mayúscula o minúscula) del fichero original por 
+ * sus correspondientes números
  * 
  * A - 4, B - 8, E - 3, I - 1, O - 0, S - 5, T - 7
  * 
