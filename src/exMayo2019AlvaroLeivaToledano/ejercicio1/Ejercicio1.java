@@ -208,6 +208,6 @@ public class Ejercicio1 {
     textFieldFicheroDestino.setColumns(10);
     textFieldFicheroDestino.setBounds(23, 141, 402, 20);
     frame.getContentPane().add(textFieldFicheroDestino);
-
   }
+
 }
