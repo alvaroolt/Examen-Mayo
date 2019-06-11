@@ -1,149 +1,144 @@
 package exMayo2019AlvaroLeivaToledano.ejercicio2;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Fecha {
 
-  final static int[] DIAS_MES = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 }; // constante, sin bisiestos
+  @SuppressWarnings("unused")
+  private static String fecha;
 
-  public static boolean esFechaValida(String f) {
+  // getInstance() obtiene un calendario utilizando la zona horaria y la
+  // configuración regional predeterminadas. El calendario devuelto se basa en la
+  // hora actual en la zona horaria
+  private static Calendar calendario = Calendar.getInstance();
 
-    // comprobar que es un formato dd/mm/aaaa
-    if (f.length() != 10 || !Character.isDigit(f.charAt(0)) || !Character.isDigit(f.charAt(1))
-        || !Character.isDigit(f.charAt(3)) || !Character.isDigit(f.charAt(4)) || !Character.isDigit(f.charAt(6))
-        || !Character.isDigit(f.charAt(7)) || !Character.isDigit(f.charAt(8)) || !Character.isDigit(f.charAt(9))
-        || f.charAt(2) != '/' || f.charAt(5) != '/') {
-      return false;
-    }
-    // comprobar si mes es correcto
-    int mes = Integer.parseInt(f.substring(3, 5));
-    if (mes < 1 || mes > 12) {
-      return false;
-    }
-    // comprobar si día es correcto
-    int dia = Integer.parseInt(f.substring(0, 2));
-    int anyo = Integer.parseInt(f.substring(6));
-    int diasmes = DIAS_MES[mes - 1]; // restamos 1 al mes para que esté entre 0 y 11
-    // ¿febrero y año bisisesto?
-    if (mes == 2 && anyo % 4 == 0 && (anyo % 100 != 0 || anyo % 400 == 0)) {
-      diasmes++;
-    }
-    return (dia > 0 && dia <= diasmes);
-  }
+  // SimpleDateFormat es una clase concreta para formatear y analizar fechas de
+  // una manera sensible al entorno local. Permite el formateo (fecha -> texto),
+  // el análisis (texto -> fecha) y la normalización.
+  private static SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 
-  public static String sumaDiaFecha(String f) {
+  public static Calendar comprobarFecha(String f) throws FechaInvalidaException {
 
-    int dia = Integer.parseInt(f.substring(0, 2));
-    int mes = Integer.parseInt(f.substring(3, 5));
-    int anno = Integer.parseInt(f.substring(6));
+    String arrayFecha[];
 
-    int diasmes = DIAS_MES[mes - 1];
-    // ¿febrero y año bisisesto?
-    if (mes == 2 && anno % 4 == 0 && (anno % 100 != 0 || anno % 400 == 0)) {
-      diasmes++;
-    }
-    dia++;
-    if (dia > diasmes) {
-      dia = 1;
-      mes++;
-      if (mes == 13) {
-        mes = 1;
-        anno++;
+    if (f.contains("/") && f.length() == 10) {
+
+      // split() divide la cadena alrededor de coincidencias de la expresión regular
+      // dada. En este caso: /
+      arrayFecha = f.split("/");
+      int dia = Integer.parseInt(arrayFecha[0]);
+      int mes = Integer.parseInt(arrayFecha[1]);
+      int anno = Integer.parseInt(arrayFecha[2]);
+
+      switch (mes) {
+      case 1:
+        calendario.set(anno, Calendar.JANUARY, dia);
+        break;
+      case 2:
+        calendario.set(anno, Calendar.FEBRUARY, dia);
+        break;
+      case 3:
+        calendario.set(anno, Calendar.MARCH, dia);
+        break;
+      case 4:
+        calendario.set(anno, Calendar.APRIL, dia);
+        break;
+      case 5:
+        calendario.set(anno, Calendar.MAY, dia);
+        break;
+      case 6:
+        calendario.set(anno, Calendar.JUNE, dia);
+        break;
+      case 7:
+        calendario.set(anno, Calendar.JULY, dia);
+        break;
+      case 8:
+        calendario.set(anno, Calendar.AUGUST, dia);
+        break;
+      case 9:
+        calendario.set(anno, Calendar.SEPTEMBER, dia);
+        break;
+      case 10:
+        calendario.set(anno, Calendar.OCTOBER, dia);
+        break;
+      case 11:
+        calendario.set(anno, Calendar.NOVEMBER, dia);
+        break;
+      case 12:
+        calendario.set(anno, Calendar.DECEMBER, dia);
+        break;
+      default:
+        calendario.set(0, 0, 0);
+        break;
       }
-    }
-    f = fecha(dia, mes, anno);
-    return f;
-  }
-
-  public static String restaDiaFecha(String f) {
-    int dia = Integer.parseInt(f.substring(0, 2));
-    int mes = Integer.parseInt(f.substring(3, 5));
-    int anno = Integer.parseInt(f.substring(6));
-
-    dia--;
-    if (dia == 0) { // mes anterior
-      mes--;
-      if (mes == 0) { // año anterior
-        mes = 12;
-        anno--;
-      }
-      dia = DIAS_MES[mes - 1];
-      // ¿febrero y año bisisesto?
-      if (mes == 2 && anno % 4 == 0 && (anno % 100 != 0 || anno % 400 == 0)) {
-        dia++;
-      }
-    }
-    f = fecha(dia, mes, anno);
-    return f;
-  }
-
-  public static int diasHastaHoy(String f) throws FechaMayorQueHoyException {
-    int dia = Integer.parseInt(f.substring(0, 2));
-    int mes = Integer.parseInt(f.substring(3, 5));
-
-    String fechaHoy;
-
-    if (dia < 10 && mes < 10) {
-      java.util.Date hoy = new Date();
-      fechaHoy = "0" + hoy.getDate() + "0/" + (1 + hoy.getMonth()) + "/" + (hoy.getYear() + 1900);
-    } else if (dia < 10) {
-      java.util.Date hoy = new Date();
-      fechaHoy = "0" + hoy.getDate() + "/" + (1 + hoy.getMonth()) + "/" + (hoy.getYear() + 1900);
-    } else if (mes < 10) {
-      java.util.Date hoy = new Date();
-      fechaHoy = hoy.getDate() + "/0" + (1 + hoy.getMonth()) + "/" + (hoy.getYear() + 1900);
     } else {
-      java.util.Date hoy = new Date();
-      fechaHoy = hoy.getDate() + "/" + (1 + hoy.getMonth()) + "/" + (hoy.getYear() + 1900);
+      calendario.set(0, 0, 0);
     }
 
-    if (comparaFechas(f, fechaHoy) > 0) {
-      throw new FechaMayorQueHoyException("Fecha mayor que hoy " + fechaHoy);
+    // si la fecha introducida no coincide con el formato correcto, se lanza la
+    // excepción FechaInvalidaException. getTime() devuelve un objeto de fecha que
+    // representa el valor de tiempo del calendario
+    if (!f.equals(formatoFecha.format(calendario.getTime()))) {
+      throw new FechaInvalidaException("Fecha incorrecta");
     }
 
-    int cont = 0;
-    do {
+    return calendario;
 
-      f = sumaDiaFecha(f);
-      cont++;
-    } while (comparaFechas(f, fechaHoy) < 0);
-
-    return cont;
   }
 
-  public static int comparaFechas(String fecha1, String fecha2) {
-    int dia1 = Integer.parseInt(fecha1.substring(0, 2));
-    int dia2 = Integer.parseInt(fecha2.substring(0, 2));
-    int mes1 = Integer.parseInt(fecha1.substring(3, 5));
-    int mes2 = Integer.parseInt(fecha2.substring(3, 5));
-    int anyo1 = Integer.parseInt(fecha1.substring(6));
-    int anyo2 = Integer.parseInt(fecha2.substring(6));
+  public static String sumarDia(String f) {
 
-    if (anyo1 != anyo2) {
-      return anyo1 - anyo2;
-    } else if (mes1 != mes2) {
-      return mes1 - mes2;
-    } else {
-      return dia1 - dia2;
-    }
+    // add() agrega o resta la cantidad de tiempo especificada al campo del
+    // calendario dado
+    calendario.add(Calendar.DATE, 1);
+
+    // getTime() devuelve un objeto de fecha que representa el valor de tiempo del
+    // calendario
+    return (formatoFecha.format(calendario.getTime()));
+
   }
 
-  public static String fecha(int d, int m, int a) {
-    String dia = Integer.toString(d).trim();
-    String mes = Integer.toString(m).trim();
-    String anyo = Integer.toString(a).trim();
-    // día
-    if (dia.length() < 2) {
-      dia = "0" + dia;
-    }
-    // mes
-    if (mes.length() < 2) {
-      mes = "0" + mes;
-    }
-    // año
-    for (int i = anyo.length(); i < 4; i++) {
-      anyo = "0" + anyo;
-    }
-    return dia + "/" + mes + "/" + anyo;
+  public static String restarDia(String f) {
+
+    // add() agrega o resta la cantidad de tiempo especificada al campo del
+    // calendario dado
+    calendario.add(Calendar.DATE, -1);
+
+    // getTime() devuelve un objeto de fecha que representa el valor de tiempo del
+    // calendario
+    return (formatoFecha.format(calendario.getTime()));
+
   }
+
+  public static int diasHastaHoy(String f) throws ParseException {
+
+    Calendar calendario1 = Calendar.getInstance();
+
+    // Calendar.MONTH +1 es debido a que enero empieza en el índice 0
+    String fecha = calendario1.get(Calendar.DATE) + "/" + (calendario1.get(Calendar.MONTH) + 1) + "/"
+        + calendario1.get(Calendar.YEAR);
+
+    // La clase ParseException señala que se ha alcanzado un error inesperado
+    // durante el análisis.
+    // parse() analiza el texto de una cadena para producir una fecha.
+    Date fechaHoy = formatoFecha.parse(fecha);
+    Date fechaTextField = formatoFecha.parse(f);
+
+    // getTime() devuelve un objeto de fecha que representa el valor de tiempo del
+    // calendario
+    long fHoy = fechaHoy.getTime();
+    long fTextField = fechaTextField.getTime();
+
+    // si la fecha introducida acontece antes que la fecha de hoy, a los días de hoy
+    // restamos los de la fecha introducida. Y si no (la fecha de hoy es posterior a
+    // la introducida), a ls días de la fecha introducida se les resta los de hoy
+    if (fechaTextField.before(fechaHoy)) {
+      return (int) (((fHoy - fTextField) / (3600 * 24 * 1000)));
+    } else
+      return (int) (((fTextField - fHoy) / (3600 * 24 * 1000)));
+  }
+
 }
