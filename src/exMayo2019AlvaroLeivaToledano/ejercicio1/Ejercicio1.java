@@ -22,6 +22,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -71,7 +72,7 @@ public class Ejercicio1 {
     frame = new JFrame();
     frame.setTitle("Ejercicio 1 - exMayo2019");
 
-    frame.setVisible(true);
+    // frame.setVisible(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     Toolkit pantalla = Toolkit.getDefaultToolkit();
@@ -151,37 +152,32 @@ public class Ejercicio1 {
 
         try {
           BufferedReader br1 = new BufferedReader(new FileReader(ficheroOrigen));
-          BufferedReader br2 = new BufferedReader(new FileReader(ficheroDestino));
-          BufferedWriter bw = new BufferedWriter(new FileWriter(ficheroDestino));
+          BufferedWriter bw2 = new BufferedWriter(new FileWriter(ficheroDestino));
+          Vector<String> escritura = new Vector<String>();
 
           String linea = "";
+          String salida = "";
 
-          // Recorremos el fichero origen sustituyendo caracteres y a su vez imprime en el
-          // fichero destino
           while (linea != null) {
-            bw.write(linea.replace('A', '4').replace('a', '4').replace('B', '8').replace('b', '8').replace('E', '3')
-                .replace('e', '3').replace('I', '1').replace('i', '1').replace('O', '0').replace('o', '0')
-                .replace('S', '5').replace('s', '5').replace('T', '7').replace('t', '7') + "\n");
             linea = br1.readLine();
+            if (linea != null)
+              escritura.addElement(linea);
           }
-          bw.close();
-          br1.close();
 
-          // Recorre el fichero destino y va añadiendo cada linea de este a
-          // contenidoFichero, para luego mostrarlo en textArea
-          String contenidoFichero = "";
-          linea = "";
-          while (linea != null) {
-            linea = br2.readLine();
-            if (linea != null) {
-              contenidoFichero += linea + "\n";
-            }
+          for (String t : escritura) {
+            t = t.replace('a', '4').replace('A', '4').replace('b', '8').replace('B', '8').replace('e', '3')
+                .replace('E', '3').replace('i', '1').replace('I', '1').replace('o', '0').replace('O', '0')
+                .replace('s', '5').replace('S', '5').replace('t', '7').replace('T', '7');
+            bw2.write(t + "\n");
+            salida = salida + t + ("\n");
           }
-          textArea.append(contenidoFichero);
-          br2.close();
+
+          br1.close();
+          bw2.close();
+          textArea.append(salida);
 
         } catch (Exception e1) {
-          JOptionPane.showMessageDialog(null, "ERROR");
+          JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
     });
