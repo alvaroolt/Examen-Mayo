@@ -115,7 +115,8 @@ public class Ejercicio2v2 {
               // si comprobarFecha no devuelve null, la fecha es correcta
               if (Fecha.comprobarFecha(textFieldIntroducirFecha.getText()) != null) {
                 textFieldFecha.setText(textFieldIntroducirFecha.getText());
-
+                subframe.setVisible(false);
+                subframe.dispose();
               }
 
             } catch (FechaInvalidaException ee) {
@@ -138,7 +139,7 @@ public class Ejercicio2v2 {
     mnOperaciones.setFont(new Font("Segoe UI", Font.PLAIN, 18));
     menuBar.add(mnOperaciones);
 
-    JMenuItem mnSumarDia = new JMenuItem("Sumar día");
+    JMenuItem mnSumarDia = new JMenuItem("Sumar dia");
     mnSumarDia.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
 
@@ -153,7 +154,7 @@ public class Ejercicio2v2 {
     });
     mnOperaciones.add(mnSumarDia);
 
-    JMenuItem mnRestarDia = new JMenuItem("Restar día");
+    JMenuItem mnRestarDia = new JMenuItem("Restar dia");
     mnRestarDia.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent arg0) {
 
@@ -168,7 +169,7 @@ public class Ejercicio2v2 {
     });
     mnOperaciones.add(mnRestarDia);
 
-    JMenuItem mnDiasHastaHoy = new JMenuItem("Días hasta hoy");
+    JMenuItem mnDiasHastaHoy = new JMenuItem("Dias hasta hoy");
     mnDiasHastaHoy.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
 

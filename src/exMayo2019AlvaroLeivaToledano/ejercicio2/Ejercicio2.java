@@ -13,6 +13,9 @@ package exMayo2019AlvaroLeivaToledano.ejercicio2;
  * • Terminar.
  * La fecha debe ser manejada mediante un objeto de una clase que o bien construyáis con sus métodos
  * correspondientes o de las que ya existen en la API de Java.
+ * 
+ * @author Alvaro Leiva Toledano
+ * @version 2.0
  */
 import java.awt.Color;
 import java.awt.Dimension;
@@ -154,7 +157,6 @@ public class Ejercicio2 {
       public void actionPerformed(ActionEvent e) {
 
         try {
-
           // antes de calcular los días hasta hoy, comprueba que la fecha sea correcta
           Fecha.comprobarFecha(textFieldFechaIntroducida.getText());
           textFieldDiasHastaHoy.setText("" + Fecha.diasHastaHoy(textFieldFechaIntroducida.getText()));
