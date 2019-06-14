@@ -76,7 +76,7 @@ public class Ejercicio2v2 {
    */
   private void initialize() {
     frmEjercicio = new JFrame();
-    frmEjercicio.setTitle("Ejercicio 2 - Examen de Mayo - versión 2.0");
+    frmEjercicio.setTitle("Ejercicio 2 - Examen de Mayo - v2.0");
     frmEjercicio.setBounds(425, 150, 450, 300);
     frmEjercicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
