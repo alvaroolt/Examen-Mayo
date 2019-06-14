@@ -20,27 +20,26 @@ package exMayo2019AlvaroLeivaToledano.ejercicio2v2;
  * @author Alvaro Leiva Toledano
  * @version 2.0
  */
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import java.awt.Insets;
 import java.awt.Font;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
-import exMayo2019AlvaroLeivaToledano.ejercicio2.Fecha;
-import exMayo2019AlvaroLeivaToledano.ejercicio2.FechaInvalidaException;
-
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import java.awt.Color;
 import javax.swing.SwingConstants;
+
+import exMayo2019AlvaroLeivaToledano.ejercicio2v2.Fecha;
+import exMayo2019AlvaroLeivaToledano.ejercicio2v2.FechaInvalidaException;
 
 public class Ejercicio2v2 {
 

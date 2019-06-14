@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import exMayo2019AlvaroLeivaToledano.ejercicio2.FechaInvalidaException;
+import exMayo2019AlvaroLeivaToledano.ejercicio2v2.FechaInvalidaException;
 
 public class Fecha {
 
